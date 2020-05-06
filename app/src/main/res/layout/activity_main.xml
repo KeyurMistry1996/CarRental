@@ -8,8 +8,8 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:src="@drawable/logo2" />
@@ -21,7 +21,7 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -41,6 +41,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button_round"
             android:text="User"
+            android:textSize="20sp"
+            android:paddingBottom="10dp"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
@@ -48,11 +50,13 @@
             android:id="@+id/adminbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/button_round"
             android:text="Admin"
+            android:paddingBottom="10dp"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -129,11 +133,13 @@
             android:text="Log In"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingBottom="10dp"
+            android:textSize="20sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
@@ -164,10 +170,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"
@@ -255,6 +260,8 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_round"
             android:text="Sign In"
+            android:textSize="20sp"
+            android:paddingBottom="10dp"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textStyle="bold" />
@@ -262,7 +269,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <TextView
@@ -352,7 +359,9 @@
             android:text="Log In"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:paddingBottom="10dp"/>
 
     </LinearLayout>
 
