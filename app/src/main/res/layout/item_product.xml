@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="15dp"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="5dp">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/face"
+            app:civ_border_color="#3f51b5"
+            app:civ_border_width="1dp"
+            app:civ_shadow="true"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            app:civ_shadow_radius="1dp"
+            app:civ_shadow_color="#3f51b5"/>
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Name"
+            android:textSize="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="120dp"
+            android:textColor="#000000"></TextView>
+        <ImageView
+            android:id="@+id/deletebtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/delete" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
