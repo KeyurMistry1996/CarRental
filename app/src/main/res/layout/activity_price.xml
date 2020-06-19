@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="40dp"
+    android:layout_height="match_parent"
+    tools:context=".initial.host.PriceActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How much you want for a day ?"
+        android:gravity="center"
+        android:layout_above="@+id/price_host"
+        android:textSize="25dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="$00.00"
+        android:inputType="numberDecimal"
+        android:layout_centerInParent="true"
+        android:id="@+id/price_host"
+        />
+    <Button
+        android:id="@+id/host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_round"
+        android:text="Host"
+        android:textSize="20sp"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</RelativeLayout>
