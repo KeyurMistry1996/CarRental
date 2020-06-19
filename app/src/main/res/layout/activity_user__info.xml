@@ -15,12 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
+
         <ImageView
             android:id="@+id/backarrow"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/backarrow"
-            android:layout_gravity="center_vertical"></ImageView>
+            android:layout_gravity="center_vertical" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -28,8 +30,7 @@
             android:text="Dashboard"
             android:textSize="30sp"
             android:textColor="#000000"
-            android:layout_gravity="center"
-            ></TextView>
+            android:layout_gravity="center" />
     </androidx.cardview.widget.CardView>
 
     <com.mikhaellopez.circularimageview.CircularImageView
@@ -63,7 +64,7 @@
         android:paddingStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <TextView
         android:id="@+id/email"
@@ -78,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <TextView
         android:id="@+id/number"
@@ -93,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <Button
         android:id="@+id/button"

@@ -3,7 +3,9 @@ package com.example.carrental.initial;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.carrental.R;
 import com.example.carrental.admin.AdminDashboard;
+import com.example.carrental.initial.home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,19 +33,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextInputLayout emaillayout, passwordlayout, namelayout, emailsignlayout, numberlayout, passwordsignlayout,adminemaillayout,adminpasswordlayout;
-    EditText loginemail, loginpassword, namesign, emailsign, numbersign, passwordsign,adminemail,adminpassword;
-    Button btnuser, btnadmin, loginbtn, signinbtn,loginadminbtn;
-    LinearLayout userloginlayout, usersigninlayout, selectuser,adminLayout;
+    TextInputLayout emaillayout, passwordlayout, namelayout, emailsignlayout, numberlayout, passwordsignlayout, adminemaillayout, adminpasswordlayout;
+    EditText loginemail, loginpassword, namesign, emailsign, numbersign, passwordsign, adminemail, adminpassword;
+    Button btnuser, btnadmin, loginbtn, signinbtn, loginadminbtn;
+    LinearLayout userloginlayout, usersigninlayout, selectuser, adminLayout;
     TextView createone, logintxtview;
     private FirebaseAuth mAuth;
 
     String namepattern = "[a-zA-Z]+";
     String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-    String txtloginemail, txtloginpassword, txtsignname, txtsignemail, txtsignnumber, txtsignpassword,txtadminemail,txtadminpassword;
+    String txtloginemail, txtloginpassword, txtsignname, txtsignemail, txtsignnumber, txtsignpassword, txtadminemail, txtadminpassword;
 
     private FirebaseFirestore db;
+
+    public static boolean loggedIn = false;
+    public static final String SHARED_PREF_NAME = "hello,sign in";
+    public static final String loginyes_no = "userlogin";
+    public static final String User_shared = "username";
+    public static final String Email_shared = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         emailsignlayout = findViewById(R.id.emailSignLayout);
         numberlayout = findViewById(R.id.numberLayout);
         passwordsignlayout = findViewById(R.id.passwordSignLayout);
-        adminemaillayout=findViewById(R.id.adminemaillayout);
-        adminpasswordlayout=findViewById(R.id.adminpasswordlayout);
+        adminemaillayout = findViewById(R.id.adminemaillayout);
+        adminpasswordlayout = findViewById(R.id.adminpasswordlayout);
 
 
         //EditText Ids
@@ -101,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Admin
 
-        adminemail=findViewById(R.id.adminemail);
-        adminpassword=findViewById(R.id.adminpassword);
+        adminemail = findViewById(R.id.adminemail);
+        adminpassword = findViewById(R.id.adminpassword);
 
 
         loginemail.addTextChangedListener(new TextWatcher() {
@@ -248,10 +257,9 @@ public class MainActivity extends AppCompatActivity {
                 } else if (txtsignpassword.isEmpty()) {
                     passwordsignlayout.setError("Enter Passoword");
                     passwordsignlayout.requestFocus();
-                } else if(!(txtsignnumber.length()==10)){
+                } else if (!(txtsignnumber.length() == 10)) {
                     numberlayout.setError("Enter valid number");
-                }
-                else {
+                } else {
                     Doseuserexist();
                 }
             }
@@ -262,16 +270,13 @@ public class MainActivity extends AppCompatActivity {
                 txtadminemail = adminemail.getText().toString().trim();
                 txtadminpassword = adminpassword.getText().toString().trim();
 
-                if (txtadminemail.isEmpty())
-                {
+                if (txtadminemail.isEmpty()) {
                     adminemaillayout.setError("Enter Email Plz..");
                     adminemaillayout.requestFocus();
                 } else if (txtadminpassword.isEmpty()) {
                     adminpasswordlayout.setError("Enter Password plz..");
                     adminpasswordlayout.requestFocus();
-                }
-                else
-                {
+                } else {
                     loginadmin();
                 }
             }
@@ -311,8 +316,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void loginadmin()
-    {
+    public void loginadmin() {
         mAuth.signInWithEmailAndPassword(txtadminemail, txtadminpassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -320,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),AdminDashboard.class));
+                            startActivity(new Intent(getApplicationContext(), AdminDashboard.class));
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -329,61 +333,70 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
                     }
                 });
     }
 
-    public void loginuser()
-    {
+    public void loginuser() {
         db.collection("user")
-                .whereEqualTo("email",txtloginemail)
-                .whereEqualTo("password",txtloginpassword)
-                .whereEqualTo("user_type","user")
+                .whereEqualTo("email", txtloginemail)
+                .whereEqualTo("password", txtloginpassword)
+                .whereEqualTo("user_type", "user")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty())
-                        {
+                        if (!queryDocumentSnapshots.isEmpty()) {
                             Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
+                            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                        }
-                        else {
+
+                            editor.putBoolean(loginyes_no, true);
+                            editor.putString(Email_shared, loginemail.getText().toString());
+
+                            editor.commit();
+                            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                        } else {
                             Toast.makeText(MainActivity.this, "Email or Password Not correct", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    public void Doseuserexist()
-    {
+    public void Doseuserexist() {
         db.collection("user")
-                .whereEqualTo("email",txtsignemail)
+                .whereEqualTo("email", txtsignemail)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty())
-                        {
+                        if (!queryDocumentSnapshots.isEmpty()) {
                             Toast.makeText(MainActivity.this, "User Already Exist Plz try to login", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             Adduser();
                         }
                     }
                 });
     }
 
-    public void Adduser()
-    {
+    public void Adduser() {
         CollectionReference dbuser = db.collection("user");
 
-        UserPojo userPojo = new UserPojo(txtsignname,txtsignemail,txtsignpassword,txtsignnumber,"user");
+        UserPojo userPojo = new UserPojo(txtsignname, txtsignemail, txtsignpassword, txtsignnumber, "user");
         dbuser.add(userPojo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(MainActivity.this, "User Added", Toast.LENGTH_LONG).show();
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
+                editor.putBoolean(loginyes_no, true);
+                editor.putString(Email_shared, emailsign.getText().toString());
+
+                editor.commit();
+                startActivity(new Intent(MainActivity.this,HomeActivity.class));
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -391,5 +404,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Error Adding User", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(loginyes_no, false);
+        if (loggedIn) {
+            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(i);
+            MainActivity.this.finish();
+        }
     }
 }

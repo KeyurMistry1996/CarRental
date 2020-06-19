@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.carrental">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo2"
@@ -9,8 +12,26 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.User_Info"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"  ></activity>
+        <activity
+            android:name=".initial.host.PriceActivity"
+            android:label="Price"
+            android:parentActivityName=".initial.host.CarFeaturesActivity" />
+        <activity
+            android:name=".initial.host.CarFeaturesActivity"
+            android:label="Car Feature"
+            android:parentActivityName=".initial.host.ImageUploadActivity" />
+        <activity
+            android:name=".initial.host.ImageUploadActivity"
+            android:label="Add Image"
+            android:parentActivityName=".initial.host.AboutCarActivity" />
+        <activity
+            android:name=".initial.host.AboutCarActivity"
+            android:label="About Car"
+            android:parentActivityName=".initial.home.HomeActivity" />
+        <activity android:name=".initial.home.HomeActivity" />
+        <activity
+            android:name=".admin.User_Info"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".admin.ManageUser"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
