@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".initial.home.CarsDetails">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/topCardDetails"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backarrowCarDetails"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/backarrow"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/seeAllTitle"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:text="Book"></TextView>
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/carDetailsImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topCardDetails"></ImageView>
+
+    <TextView
+            android:id="@+id/carDetailsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Name"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsImage" />
+
+        <TextView
+            android:id="@+id/carDetailsPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@id/carDetailsName"
+            android:padding="5dp"
+            android:text="Name"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsImage">
+
+        </TextView>
+
+        <RatingBar
+            android:id="@+id/carDetailsRating"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:foregroundGravity="left"
+            android:scaleX=".5"
+            android:scaleY=".5"
+            android:transformPivotX="20dp"
+            android:transformPivotY="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsName" />
+
+        <View
+            android:id="@+id/carDetailsUpperView"
+            android:layout_width="match_parent"
+            android:layout_height="0.6dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsRating"></View>
+
+        <LinearLayout
+            android:id="@+id/carDetaislFeatures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsUpperView">
+
+            <ImageView
+                android:id="@+id/carDetailsPerson"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/person_icon"
+                ></ImageView>
+
+            <ImageView
+                android:id="@+id/carDetailsAuto"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:src="@drawable/auto_icon"></ImageView>
+
+            <ImageView
+                android:id="@+id/carDetailsAirbag"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:src="@drawable/airbag"></ImageView>
+
+            <ImageView
+                android:id="@+id/carDetailsGPS"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:src="@drawable/gps_icon"></ImageView>
+
+            <ImageView
+                android:id="@+id/carDetailsBluetooth"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:src="@drawable/bluetooth"></ImageView>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/carDetailsBottomView"
+            android:layout_width="match_parent"
+            android:layout_height="0.6dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/carDetaislFeatures"></View>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:paddingStart="10dp"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsBottomView"></TextView>
+
+        <TextView
+            android:id="@+id/carDetailsDescription"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="1dp"
+            android:paddingStart="10dp"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Button
+            android:id="@+id/carDetailsBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="85dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="86dp"
+            android:background="@drawable/button_round"
+            android:paddingBottom="10dp"
+            android:text="Book"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carDetailsDescription">
+
+        </Button>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

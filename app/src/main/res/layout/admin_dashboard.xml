@@ -8,9 +8,10 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/topCard"
+        android:id="@+id/topCardSeeAll"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        app:cardBackgroundColor="@color/colorPrimary"
         android:background="@drawable/ractangledash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

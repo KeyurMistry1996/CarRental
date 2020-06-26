@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/new_cars_card"
+        android:layout_width="260dp"
+        android:layout_height="220dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:dividerHeight="0.0px"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        app:cardPreventCornerOverlap="false"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/new_vehicles_image"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/new_vehicles_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/new_vehicles_image"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Hyundai sonata"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/new_vehicles_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/new_vehicles_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="carNumber"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <RatingBar
+                android:id="@+id/new_vehicles_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/new_vehicles_name"
+                android:numStars="5"
+                android:rating="5"
+                android:layout_marginStart="10dp"
+                style="?android:attr/ratingBarStyleSmall"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

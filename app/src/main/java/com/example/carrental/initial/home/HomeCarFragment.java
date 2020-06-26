@@ -1,11 +1,13 @@
 package com.example.carrental.initial.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,10 +39,13 @@ import com.squareup.picasso.Picasso;
 public class HomeCarFragment extends Fragment {
 
 
-    RecyclerView newArrivalList;
-    FirebaseFirestore newArrivalDB;
+    RecyclerView newArrivalList,popularList;
+    FirebaseFirestore carsDB;
+    FirestoreRecyclerAdapter<CarsPojo, NewArrivalView> adapternewArrival;
+    FirestoreRecyclerAdapter<CarsPojo,PopularView> adapterPopular;
+    TextView see_all_new,see_all_popular;
 
-    FirestoreRecyclerAdapter adapternewArrival;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -91,70 +97,176 @@ public class HomeCarFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_home_car, container, false);
 
         newArrivalList = view.findViewById(R.id.newArrivalList);
-        newArrivalDB = FirebaseFirestore.getInstance();
+        newArrivalList.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+
+        popularList = view.findViewById(R.id.popularList);
+        popularList.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+
+        see_all_new = view.findViewById(R.id.see_all_new);
+        see_all_popular = view.findViewById(R.id.see_all_popular);
+
+        carsDB = FirebaseFirestore.getInstance();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final String email = sharedPreferences.getString(MainActivity.Email_shared, MainActivity.SHARED_PREF_NAME);
 
-        Query query = newArrivalDB.collection("Cars");
 
-        System.out.println(query);
-        FirestoreRecyclerOptions<HostPojo> options =new FirestoreRecyclerOptions.Builder<HostPojo>()
-                .setLifecycleOwner(this)
-                .setQuery(query,HostPojo.class)
+        final Query query = carsDB.collection("Cars").whereEqualTo("popularity","New Arrival");
+        final Query queryPopular = carsDB.collection("Cars").whereEqualTo("popularity","New Arrival");
+
+        see_all_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),SeeAllCarsActivity.class);
+                intent.putExtra("Title","New Arrival");
+                intent.putExtra("Query", "new");
+                startActivity(intent);
+            }
+        });
+
+        see_all_popular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),SeeAllCarsActivity.class);
+                intent.putExtra("Title","Most Popular");
+                intent.putExtra("Query", "popular");
+                startActivity(intent);
+            }
+        });
+
+
+        FirestoreRecyclerOptions<CarsPojo> options = new FirestoreRecyclerOptions.Builder<CarsPojo>()
+                .setQuery(query, CarsPojo.class)
                 .build();
 
-        adapternewArrival = new FirestoreRecyclerAdapter<HostPojo , newArrivalView>(options){
-            @NonNull
+        FirestoreRecyclerOptions<CarsPojo> optionsPopular = new FirestoreRecyclerOptions.Builder<CarsPojo>()
+                .setQuery(queryPopular, CarsPojo.class)
+                .build();
+
+        adapternewArrival = new FirestoreRecyclerAdapter<CarsPojo, NewArrivalView>(options){
             @Override
-            public newArrivalView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.hostvehiclesitem,parent,false);
-                return new newArrivalView(view);
-            }
-            @Override
-            protected void onBindViewHolder(@NonNull newArrivalView holder, int position, @NonNull HostPojo model) {
+            protected void onBindViewHolder(@NonNull NewArrivalView holder, int position, @NonNull CarsPojo model) {
+                final String id = getSnapshots().getSnapshot(position).getId();
                 Picasso.with(getActivity())
                         .load(model.getUrl_Of_CarImage())
-                        .placeholder(R.mipmap.ic_launcher)
                         .into(holder.vehicles_image);
                 holder.vehicles_name.setText(model.getBrand());
                 holder.vehicles_number.setText(model.getTransmission());
-                Log.i("name" ,model.getBrand());
-                System.out.println("Name  : " + model.getBrand());
+                holder.vehicle_new_rating.setRating(model.getRating());
+                holder.vehicle_new_cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(),CarsDetails.class);
+                        intent.putExtra("id",id);
+                        intent.putExtra("Activity","HomeCarFragment");
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @NonNull
+            @Override
+            public NewArrivalView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_new,parent,false);
+                return new NewArrivalView(view);
+            }
+
+
+        };
+
+        adapterPopular = new FirestoreRecyclerAdapter<CarsPojo, PopularView>(optionsPopular) {
+            @Override
+            protected void onBindViewHolder(@NonNull PopularView holder, int position, @NonNull CarsPojo model) {
+                final String id = getSnapshots().getSnapshot(position).getId();
+                Picasso.with(getActivity())
+                        .load(model.getUrl_Of_CarImage())
+                        .into(holder.vehicles_image);
+                holder.vehicles_name.setText(model.getBrand());
+                holder.vehicles_number.setText(model.getTransmission());
+                holder.vehicle_popular_rating.setRating(model.getRating());
+                holder.vehicle_popular_cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(),CarsDetails.class);
+                        intent.putExtra("id",id);
+                        intent.putExtra("Activity","HomeCarFragment");
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @NonNull
+            @Override
+            public PopularView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_popular,parent,false);
+                return new PopularView(view);
             }
         };
-        newArrivalList.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL , false);
-        newArrivalList.setLayoutManager(linearLayoutManager);
-        newArrivalList.setAdapter(adapternewArrival);
 
+        newArrivalList.setAdapter(adapternewArrival);
+        popularList.setAdapter(adapterPopular);
         return view;
     }
-    private class newArrivalView extends RecyclerView.ViewHolder {
+    private class NewArrivalView extends RecyclerView.ViewHolder {
 
         private ImageView vehicles_image;
         private TextView vehicles_name,vehicles_number;
-        private RatingBar vehicles_rate;
+        private CardView vehicle_new_cardView;
+        private RatingBar vehicle_new_rating;
 
-        public newArrivalView(@NonNull View itemView) {
+
+        public NewArrivalView(@NonNull View itemView) {
             super(itemView);
 
-            vehicles_image = itemView.findViewById(R.id.vehicles_image);
-            vehicles_name = itemView.findViewById(R.id.vehicles_name);
-            vehicles_number = itemView.findViewById(R.id.vehicles_number);
+            vehicles_image = itemView.findViewById(R.id.new_vehicles_image);
+            vehicles_name = itemView.findViewById(R.id.new_vehicles_name);
+            vehicles_number = itemView.findViewById(R.id.new_vehicles_number);
+            vehicle_new_cardView = itemView.findViewById(R.id.new_cars_card);
+            vehicle_new_rating = itemView.findViewById(R.id.new_vehicles_rate);
 
         }
     }
+
+
+    private class PopularView extends RecyclerView.ViewHolder{
+        private ImageView vehicles_image;
+        private TextView vehicles_name,vehicles_number;
+        private CardView vehicle_popular_cardView;
+        private RatingBar vehicle_popular_rating;
+
+        public PopularView(@NonNull View itemView) {
+            super(itemView);
+            vehicles_image = itemView.findViewById(R.id.new_vehicles_image);
+            vehicles_name = itemView.findViewById(R.id.new_vehicles_name);
+            vehicles_number = itemView.findViewById(R.id.new_vehicles_number);
+            vehicle_popular_cardView = itemView.findViewById(R.id.popular_cars_card);
+            vehicle_popular_rating = itemView.findViewById(R.id.popular_vehicles_rate);
+
+        }
+    }
+
+
+
 
     @Override
     public void onStart() {
         super.onStart();
         adapternewArrival.startListening();
+        adapterPopular.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        adapternewArrival.stopListening();
+
+        if (adapternewArrival != null) {
+            adapternewArrival.stopListening();
+        }
+        if(adapterPopular != null){
+            adapterPopular.stopListening();
+        }
+
     }
 }
