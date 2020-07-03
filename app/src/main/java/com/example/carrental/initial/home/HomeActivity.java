@@ -69,31 +69,6 @@ public class HomeActivity extends AppCompatActivity {
         setfragment(homeFragment);
 
 
-//        switch (back_check)
-//        {
-//            case "history":
-//                setfragment(historyFragment);
-//                setTitle("History");
-//                break;
-//            case "host":
-//                setfragment(homeFragment);
-//                setTitle("Host");
-//                break;
-//            case "profile":
-//                setfragment(profileFragment);
-//                setTitle("Profile");
-//                break;
-//            case "search":
-//                setfragment(searchFragment);
-//                setTitle("Search");
-//                break;
-//            default:
-//                setfragment(homeFragment);
-//                setTitle("Car Rental");
-//
-//        }
-
-
 
         main_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -118,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.nav_profile :
                         back_check="profile";
                         setfragment(profileFragment);
-                        setTitle("Profile");
+                        setTitle("Your Profile");
                         return true;
                     case R.id.nav_search :
                         back_check="search";

@@ -341,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
         db.collection("user")
                 .whereEqualTo("email", txtloginemail)
                 .whereEqualTo("password", txtloginpassword)
-                .whereEqualTo("user_type", "user")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -383,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
     public void Adduser() {
         CollectionReference dbuser = db.collection("user");
 
-        UserPojo userPojo = new UserPojo(txtsignname, txtsignemail, txtsignpassword, txtsignnumber, "user");
+        UserPojo userPojo = new UserPojo(txtsignname, txtsignemail, txtsignpassword, txtsignnumber);
         dbuser.add(userPojo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
