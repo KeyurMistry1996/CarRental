@@ -13,16 +13,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".initial.home.DrivingLicence"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:parentActivityName=".initial.home.ScheduleActivity"
+            android:label="Driving License"></activity>
         <activity
             android:name=".initial.home.ScheduleActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:parentActivityName=".initial.home.CarsDetails"
+            android:label="Schedule"/>
         <activity
             android:name=".initial.home.CarsDetails"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:parentActivityName=".initial.home.HomeActivity"
+            android:label="Car Details"/>
         <activity
             android:name=".initial.home.SeeAllCarsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:parentActivityName=".initial.home.HomeActivity"
+            android:label="See All"/>
+        <activity
+            android:name=".initial.profile.viewProfileActivity"
+
+            android:label="Profile"/>
+        <activity
+            android:name=".initial.home.SummeryActivity"
+            android:parentActivityName=".initial.home.DrivingLicence"
+            android:label="Summery"/>
+        <activity
+            android:name=".initial.home.CheckoutActivity"
+            android:parentActivityName=".initial.home.SummeryActivity"
+            android:label="Checkout"/>
+        <activity
+            android:name=".initial.search.SeeAllCarSearch"
+            android:parentActivityName=".initial.home.HomeActivity"
+            android:label="Search Result"/>
+        <activity
+            android:name=".initial.home.ETicketActivity"
+            android:label="E-Ticket"/>
         <activity
             android:name=".initial.host.PriceActivity"
             android:label="Price"
