@@ -25,6 +25,7 @@
             app:civ_border_color="#3f51b5"
             app:civ_border_width="1dp"
             app:civ_shadow="true"
+            android:id="@+id/user_image"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
             app:civ_shadow_radius="1dp"

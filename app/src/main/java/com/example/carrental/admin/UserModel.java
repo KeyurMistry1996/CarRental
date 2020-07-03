@@ -15,6 +15,16 @@ public class UserModel {
 
     private String name;
 
+    public String getProfileurl() {
+        return profileurl;
+    }
+
+    public void setProfileurl(String profileurl) {
+        this.profileurl = profileurl;
+    }
+
+    private String profileurl;
+
     public UserModel(String name){
         this.name = name;
     }

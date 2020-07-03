@@ -42,7 +42,7 @@ public class AdminDashboard extends AppCompatActivity {
             public void onClick(View v) {
 
                 startActivity(new Intent(getApplicationContext(),ManageUser.class));
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
 
             }
         });
@@ -51,6 +51,7 @@ public class AdminDashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                startActivity(new Intent(getApplicationContext(),ManageCarListActivity.class));
             }
         });
     }

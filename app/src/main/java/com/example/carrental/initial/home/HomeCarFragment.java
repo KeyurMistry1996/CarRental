@@ -118,7 +118,6 @@ public class HomeCarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),SeeAllCarsActivity.class);
-                intent.putExtra("Title","New Arrival");
                 intent.putExtra("Query", "new");
                 startActivity(intent);
             }
@@ -128,7 +127,6 @@ public class HomeCarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),SeeAllCarsActivity.class);
-                intent.putExtra("Title","Most Popular");
                 intent.putExtra("Query", "popular");
                 startActivity(intent);
             }
@@ -156,12 +154,17 @@ public class HomeCarFragment extends Fragment {
                 holder.vehicle_new_cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("hello,sign in",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("id",id);
+                        editor.commit();
                         Intent intent = new Intent(getActivity(),CarsDetails.class);
                         intent.putExtra("id",id);
                         intent.putExtra("Activity","HomeCarFragment");
                         startActivity(intent);
                     }
                 });
+
 
             }
 
@@ -188,6 +191,11 @@ public class HomeCarFragment extends Fragment {
                 holder.vehicle_popular_cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("hello,sign in",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("id",id);
+                        editor.commit();
+
                         Intent intent = new Intent(getActivity(),CarsDetails.class);
                         intent.putExtra("id",id);
                         intent.putExtra("Activity","HomeCarFragment");

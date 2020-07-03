@@ -5,184 +5,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".initial.home.DrivingLicence">
-    <androidx.cardview.widget.CardView
-        android:id="@+id/topCardDetails"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/countryInputLayout"
+        android:layout_width="362dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/backarrowDriverseLicence"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/backarrow"></ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/scheduleTitle"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:text="Drivers Lincense"></TextView>
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/countryLicenseLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/topCardDetails"
-        tools:layout_editor_absoluteX="0dp">
-
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/countryLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="County"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:hint="Country" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/provinceLicenseLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/provinceInputLayout"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countryLicenseLayout">
+        app:layout_constraintTop_toBottomOf="@+id/countryInputLayout">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/provinceLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Province"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:hint="Province" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/numberLicenseLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/numberInputLayout"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/provinceLicenseLayout">
+        app:layout_constraintTop_toBottomOf="@+id/provinceInputLayout">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/numberLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="License Number"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:hint="License Number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstnameLicenseLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/firstnameInputLayout"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberLicenseLayout">
+        app:layout_constraintTop_toBottomOf="@+id/numberInputLayout">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstnameLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:hint="First Name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastnameLicenseLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/lastnameInputLayout"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstnameLicenseLayout">
+        app:layout_constraintTop_toBottomOf="@+id/firstnameInputLayout">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/lastnameLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:hint="Last Name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthdateLicenseLayout"
-        android:layout_width="match_parent"
+        android:id="@+id/birthdateInputLayout"
+        android:layout_width="362dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimaryDark"
-        app:errorTextAppearance="@style/error_appearance"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastnameLicenseLayout">
+        app:layout_constraintTop_toBottomOf="@+id/lastnameInputLayout">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/birthdateLicense"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Birth Date"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/colorPrimaryDark"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="93dp" />
-
+            android:drawableLeft="@drawable/datepicker"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/checkBoxSaveLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="5dp"
+        android:text="Save License"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthdateInputLayout">
+
+    </CheckBox>
 
     <Button
         android:id="@+id/nextbuttonLicense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="239dp"
+        android:layout_height="77dp"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_round"
-        android:paddingBottom="10dp"
+        android:paddingBottom="15dp"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthdateLicenseLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSaveLicense" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

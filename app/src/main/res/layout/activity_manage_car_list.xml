@@ -4,17 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".initial.home.SeeAllCarsActivity"
-    android:background="#ecf0f1">
-
-
+    tools:context=".admin.ManageCarListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/seeAllRecycler"
+        android:id="@+id/manageCarRecycler"
         android:layout_width="409dp"
-        android:layout_height="659dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="729dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topCardSeeAll" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

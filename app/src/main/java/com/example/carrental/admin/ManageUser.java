@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.squareup.picasso.Picasso;
 
 public class ManageUser extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -38,15 +39,8 @@ public class ManageUser extends AppCompatActivity {
 
        recyclerView  = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        back = findViewById(R.id.backarrow);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),AdminDashboard.class));
-                overridePendingTransition(0,R.anim.slide_exite);
-            }
-        });
+
 
        rootRef = FirebaseFirestore.getInstance();
         Query query = rootRef.collection("user").orderBy("name", Query.Direction.ASCENDING);;
@@ -72,6 +66,10 @@ public class ManageUser extends AppCompatActivity {
                 final String name = (String) getSnapshots().getSnapshot(position).get("name");
                 String email = (String) getSnapshots().getSnapshot(position).get("email");
                 String number = (String) getSnapshots().getSnapshot(position).get("number");
+                Picasso.with(getApplicationContext())
+                        .load(model.getProfileurl())
+                        .placeholder(R.drawable.bluetooth)
+                        .into(holder.profile);
                 final UserInfo userInfo = new UserInfo(documentId,name,email,number);
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -82,8 +80,9 @@ public class ManageUser extends AppCompatActivity {
                         intent.putExtra("email",userInfo.getEmail());
                         intent.putExtra("number",userInfo.getNumber());
                         intent.putExtra("id",documentId);
+                        intent.putExtra("image",model.getProfileurl());
                         startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
                     }
                 });
                 holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -137,13 +136,14 @@ public class ManageUser extends AppCompatActivity {
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private View view;
-        ImageView imageView;
+        ImageView imageView,profile;
         CardView cardView;
 
         UserViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             imageView = itemView.findViewById(R.id.deletebtn);
+            profile = itemView.findViewById(R.id.user_image);
             cardView = itemView.findViewById(R.id.card);
 
         }

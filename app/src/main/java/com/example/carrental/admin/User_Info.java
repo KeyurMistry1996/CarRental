@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.carrental.R;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class User_Info extends AppCompatActivity {
 
@@ -31,23 +32,21 @@ public class User_Info extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         number = findViewById(R.id.number);
+        imageView = findViewById(R.id.image);
         button = findViewById(R.id.button);
-        imageView = findViewById(R.id.backarrow);
         rootRef = FirebaseFirestore.getInstance();
 
         final Intent intent = getIntent();
-        title.setText(intent.getStringExtra("name"));
         name.setText(intent.getStringExtra("name"));
         email.setText(intent.getStringExtra("email"));
         number.setText(intent.getStringExtra("number"));
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                overridePendingTransition(0,R.anim.slide_exite);
-            }
-        });
+        Picasso.with(getApplicationContext())
+                .load(intent.getStringExtra("image"))
+                .placeholder(R.drawable.bluetooth)
+                .into(imageView);
+
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

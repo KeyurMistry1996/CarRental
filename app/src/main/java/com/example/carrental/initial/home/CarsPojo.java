@@ -2,7 +2,7 @@ package com.example.carrental.initial.home;
 
 public class CarsPojo {
     public  CarsPojo(){}
-    public CarsPojo(boolean airbag, boolean audio, boolean automatic, boolean bluetooth, String brand, String description, boolean gps, String model, String odormeter, int person_number, String popularity, int price, int rating, String transmission, String url_Of_CarImage, String user_email, int year) {
+    public CarsPojo(boolean airbag, boolean audio, boolean automatic, boolean bluetooth, String brand, String description, boolean gps, String model, String odormeter, int person_number, String popularity, int price, int rating, String transmission, String url_Of_CarImage, String user_email, int year,boolean status) {
         this.airbag = airbag;
         this.audio = audio;
         this.automatic = automatic;
@@ -20,6 +20,7 @@ public class CarsPojo {
         this.url_Of_CarImage = url_Of_CarImage;
         this.user_email = user_email;
         this.year = year;
+        this.status = status;
     }
 
     public boolean isAirbag() {
@@ -175,6 +176,16 @@ public class CarsPojo {
     private String url_Of_CarImage;
     private String user_email;
     private int year;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    private boolean status;
 
 
 }

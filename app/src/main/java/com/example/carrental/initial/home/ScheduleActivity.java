@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,15 +65,11 @@ public class ScheduleActivity extends AppCompatActivity {
         pickUpTime = findViewById(R.id.pickUpTime);
         dropOffTime = findViewById(R.id.dropOffTime);
         book = findViewById(R.id.buttonBookSchedule);
-        back = findViewById(R.id.backarrowSchedule);
         dayOfWeek = findViewById(R.id.pickUpDateDay);
          dayOfWeekDrop = findViewById(R.id.dropOffWeekDay);
         monthPick = findViewById(R.id.pickUpMonth);
          dropMonth = findViewById(R.id.dropOffDateMonth);
 
-
-        Intent intent = getIntent();
-        id=intent.getStringExtra("id");
 
         pickUp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -275,27 +273,25 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),CarsDetails.class));
-            }
-        });
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
                 if(!(noOfDaysBetween <=0)){
+                    SharedPreferences sharedPreferences =getApplicationContext().getSharedPreferences("hello,sign in", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("pickUpTime",pickTime);
+                    editor.putString("dropOffTime",dropTime);
+                    editor.putString("pickDate",pickDate);
+                    editor.putString("dropDate",dropDate);
+                    editor.putString("pickUpLocation",pickUpLocation);
+                    editor.putString("dropoffLocation",dropOffLocation);
+                    editor.putLong("days",noOfDaysBetween);
+                    editor.commit();
+
+
                     Intent intent = new Intent(getApplicationContext(),DrivingLicence.class);
-                    intent.putExtra("id",id);
-                    intent.putExtra("pickUpTime",pickTime);
-                    intent.putExtra("dropOffTime",dropTime);
-                    intent.putExtra("pickDate",pickDate);
-                    intent.putExtra("dropDate",dropDate);
-                    intent.putExtra("pickUpLocation",pickUpLocation);
-                    intent.putExtra("dropoffLocation",dropOffLocation);
-                    intent.putExtra("days",noOfDaysBetween);
                     startActivity(intent);
                 }
                 else {

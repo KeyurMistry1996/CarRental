@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +16,10 @@ import android.widget.Toast;
 
 import com.example.carrental.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,6 +32,7 @@ public class CarsDetails extends AppCompatActivity {
     TextView carName,carPrice,cardexcription;
     RatingBar carRating;
     Button book;
+     String id;
 
 
 
@@ -43,7 +47,6 @@ public class CarsDetails extends AppCompatActivity {
         airbag = findViewById(R.id.carDetailsAirbag);
         gps = findViewById(R.id.carDetailsGPS);
         bluetooth = findViewById(R.id.carDetailsBluetooth);
-        back = findViewById(R.id.backarrowCarDetails);
 
         carName = findViewById(R.id.carDetailsName);
         carPrice = findViewById(R.id.carDetailsPrice);
@@ -53,63 +56,43 @@ public class CarsDetails extends AppCompatActivity {
         book = findViewById(R.id.carDetailsBook);
 
         final Intent intent = getIntent();
-        final String id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
+        String activity = intent.getStringExtra("Activity");
 
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("hello,sign in",MODE_PRIVATE);
+        String carId = sharedPreferences.getString("id","");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Cars")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String string = document.getId();
-                                if(id.equals(string)){
-                                    Picasso.with(getApplicationContext())
-                                            .load(String.valueOf(document.get("url_Of_CarImage")))
-                                            .into(carImage);
-                                    carName.setText((CharSequence) document.get("brand"));
-                                    carPrice.setText("$"+document.get("price")+"/day");
-                                    Float stars = new Float(String.valueOf(document.get("rating")));
-                                    carRating.setRating(stars);
-                                    cardexcription.setText((CharSequence) document.get("description"));
-
-                                    if(!document.getBoolean("airbag")){
-                                        airbag.setAlpha((float) 0.3);
-                                    }
-                                    if(!document.getBoolean("automatic")){
-                                        airbag.setAlpha((float) 0.3);
-                                    }
-                                    if(!document.getBoolean("gps")){
-                                        airbag.setAlpha((float) 0.3);
-                                    }
-                                    if(!document.getBoolean("bluetooth")){
-                                        airbag.setAlpha((float) 0.3);
-                                    }
-
-                                }
-                            }
-                        } else {
-                            Log.w("Error", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-
-        back.setOnClickListener(new View.OnClickListener() {
+        db.collection("Cars").document(carId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View v) {
-                String activity = intent.getStringExtra("Activity");
-                if(activity.equals("SeeAllCars")){
-                    startActivity(new Intent(getApplicationContext(),SeeAllCarsActivity.class));
-                    finish();
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Picasso.with(getApplicationContext())
+                        .load(String.valueOf(documentSnapshot.get("url_Of_CarImage")))
+                        .into(carImage);
+                carName.setText((CharSequence) documentSnapshot.get("brand"));
+                carPrice.setText("$"+documentSnapshot.get("price")+"/day");
+                Float stars = new Float(String.valueOf(documentSnapshot.get("rating")));
+                carRating.setRating(stars);
+                cardexcription.setText((CharSequence) documentSnapshot.get("description"));
+
+                if(!documentSnapshot.getBoolean("airbag")){
+                    airbag.setAlpha((float) 0.3);
                 }
-                else {
-                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                    finish();
+                if(!documentSnapshot.getBoolean("automatic")){
+                    airbag.setAlpha((float) 0.3);
+                }
+                if(!documentSnapshot.getBoolean("gps")){
+                    airbag.setAlpha((float) 0.3);
+                }
+                if(!documentSnapshot.getBoolean("bluetooth")){
+                    airbag.setAlpha((float) 0.3);
                 }
             }
         });
+
+
+
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override

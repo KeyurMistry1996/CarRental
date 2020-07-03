@@ -6,7 +6,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,21 +41,10 @@ public class SeeAllCarsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_all_cars);
 
-        titleActivity = findViewById(R.id.seeAllTitle);
-        backArrow = findViewById(R.id.backarrowSeeAll);
 
         recyclerView = findViewById(R.id.seeAllRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
 
-
-
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                finish();
-            }
-        });
 
         rootRef = FirebaseFirestore.getInstance();
 
@@ -76,6 +67,10 @@ public class SeeAllCarsActivity extends AppCompatActivity {
                    holder.see_all_vehicle_new_cardView.setOnClickListener(new View.OnClickListener() {
                        @Override
                        public void onClick(View v) {
+                           SharedPreferences sharedPreferences =getApplicationContext().getSharedPreferences("hello,sign in", Context.MODE_PRIVATE);
+                           SharedPreferences.Editor editor = sharedPreferences.edit();
+                           editor.putString("id",id);
+                           editor.commit();
                            Intent intent = new Intent(getApplicationContext(),CarsDetails.class);
                            intent.putExtra("id",id);
                            intent.putExtra("Activity","SeeAllCars");
@@ -84,8 +79,8 @@ public class SeeAllCarsActivity extends AppCompatActivity {
 
                        }
                    });
-                title = model.getPopularity();
-                titleActivity.setText(title);
+
+
 
             }
 
