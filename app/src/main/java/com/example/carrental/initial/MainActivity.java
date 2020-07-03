@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
     public void Adduser() {
         CollectionReference dbuser = db.collection("user");
 
-        UserPojo userPojo = new UserPojo(txtsignname, txtsignemail, txtsignpassword, txtsignnumber, "user");
+        UserPojo userPojo = new UserPojo(txtsignname, txtsignemail, txtsignpassword, txtsignnumber);
         dbuser.add(userPojo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
