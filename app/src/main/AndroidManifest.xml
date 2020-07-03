@@ -12,36 +12,17 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.ManageCarListActivity"
-            android:label="Manage car"
-            android:parentActivityName=".admin.AdminDashboard"></activity>
-        <activity
-            android:name=".initial.home.ETicketActivity"
-            android:label="E-Ticket" />
-        <activity
-            android:name=".initial.home.CheckoutActivity"
-            android:label="Checkout"
-            android:parentActivityName=".initial.home.SummeryActivity" />
-        <activity
-            android:name=".initial.home.SummeryActivity"
-            android:label="Summery"
-            android:parentActivityName=".initial.home.DrivingLicence" />
-        <activity
-            android:name=".initial.home.DrivingLicence"
-            android:label="Driving License"
-            android:parentActivityName=".initial.home.ScheduleActivity" />
+        <activity android:name=".initial.home.DrivingLicence"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".initial.home.ScheduleActivity"
-            android:label="Schedule"
-            android:parentActivityName=".initial.home.CarsDetails" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".initial.home.CarsDetails"
-            android:label="Car Details"
-            android:parentActivityName=".initial.home.HomeActivity" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".initial.home.SeeAllCarsActivity"
-            android:label="All Cars"
-            android:parentActivityName=".initial.home.HomeActivity" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".initial.host.PriceActivity"
             android:label="Price"
@@ -61,15 +42,13 @@
         <activity android:name=".initial.home.HomeActivity" />
         <activity
             android:name=".admin.User_Info"
-            android:label="User Info"
-            android:parentActivityName=".admin.ManageUser" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".admin.ManageUser"
-            android:label="Manage User"
-            android:parentActivityName=".admin.AdminDashboard" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".admin.AdminDashboard"
-            android:label="Dashboard" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".initial.Splash"
             android:theme="@style/Theme.AppCompat.NoActionBar">

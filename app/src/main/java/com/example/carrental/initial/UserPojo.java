@@ -7,14 +7,25 @@ public class UserPojo {
     String email;
     String password;
     String number;
-    String user_type;
+    String userurl;
 
-    public UserPojo(String name, String email, String password, String number, String user_type) {
+    public String getUserurl() {
+        return userurl;
+    }
+
+    public UserPojo(String userurl) {
+        this.userurl = userurl;
+    }
+
+    public void setUserurl(String userurl) {
+        this.userurl = userurl;
+    }
+
+    public UserPojo(String name, String email, String password, String number) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.number = number;
-        this.user_type = user_type;
     }
 
     public String getName() {
@@ -48,12 +59,6 @@ public class UserPojo {
     public void setNumber(String number) {
         this.number = number;
     }
-    public String getUser_type() {
-        return user_type;
-    }
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
-    }
 
 }
