@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,15 +47,26 @@ public class ManageCarListActivity extends AppCompatActivity {
                 .build();
 
         adapter = new FirestoreRecyclerAdapter<CarsPojo, CarView>(options) {
+            @SuppressLint("ResourceAsColor")
             @Override
             protected void onBindViewHolder(@NonNull CarView holder, int position, @NonNull CarsPojo model) {
-                String id = getSnapshots().getSnapshot(position).getId();
+                final String id = getSnapshots().getSnapshot(position).getId();
                 Picasso.with(getApplicationContext())
                         .load(model.getUrl_Of_CarImage())
                         .into(holder.vehicles_image);
                 holder.vehicles_name.setText(model.getBrand());
                 holder.vehicle_popular_rating.setRating(model.getRating());
-                holder.vehicles_number.setText(model.getTransmission());
+holder.vehicles_number.setText(model.getTransmission());
+
+               holder.vehicle_popular_cardView.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Intent intent = new Intent(getApplicationContext(),CarInfoActivity.class);
+                       intent.putExtra("id",id);
+                       startActivity(intent);
+
+                   }
+               });
 
 
 
@@ -67,6 +79,8 @@ public class ManageCarListActivity extends AppCompatActivity {
                 return new CarView(view);
             }
         };
+
+        recyclerView.setAdapter(adapter);
 
     }
 

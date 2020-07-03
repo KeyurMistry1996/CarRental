@@ -46,7 +46,6 @@ public class ScheduleActivity extends AppCompatActivity {
     int dropOffUpDay;
     String pickTime,dropTime,pickDate,dropDate;
     String dropOffUpMonth;
-    ImageView back;
     TextView monthPick,dropMonth;
     LocalDate dateBefore,dateAfter;
     TextView dayOfWeek,dayOfWeekDrop;

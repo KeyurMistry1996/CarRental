@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.carrental.R;
 
 public class SeeAllView extends RecyclerView.ViewHolder {
-     ImageView see_all_vehicles_image;
-     TextView see_all_vehicles_name,see_all_vehicles_number;
-     CardView see_all_vehicle_new_cardView;
-     RatingBar see_all_rating;
+     public ImageView see_all_vehicles_image;
+     public TextView see_all_vehicles_name,see_all_vehicles_number;
+     public CardView see_all_vehicle_new_cardView;
+     public RatingBar see_all_rating;
 
     public SeeAllView(@NonNull View itemView) {
         super(itemView);

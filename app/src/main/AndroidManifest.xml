@@ -12,9 +12,17 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.ManageCarListActivity"
+        <activity android:name=".initial.search.SeeAllCarSearch"
+            android:label="Search Result"
+            android:parentActivityName=".initial.home.HomeActivity"></activity>
+        <activity
+            android:name=".admin.CarInfoActivity"
+            android:label="Car Info"
+            android:parentActivityName=".admin.ManageCarListActivity" />
+        <activity
+            android:name=".admin.ManageCarListActivity"
             android:label="Manage car"
-            android:parentActivityName=".admin.AdminDashboard"></activity>
+            android:parentActivityName=".admin.AdminDashboard" />
         <activity
             android:name=".initial.home.ETicketActivity"
             android:label="E-Ticket" />

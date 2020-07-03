@@ -18,10 +18,10 @@ public class CarView extends RecyclerView.ViewHolder {
     public RatingBar vehicle_popular_rating;
     public CarView(@NonNull View itemView) {
         super(itemView);
-        vehicles_image = itemView.findViewById(R.id.new_vehicles_image);
-        vehicles_name = itemView.findViewById(R.id.new_vehicles_name);
-        vehicles_number = itemView.findViewById(R.id.new_vehicles_number);
-        vehicle_popular_cardView = itemView.findViewById(R.id.popular_cars_card);
-        vehicle_popular_rating = itemView.findViewById(R.id.popular_vehicles_rate);
+        vehicles_image = itemView.findViewById(R.id.see_all_vehicles_image);
+        vehicles_name = itemView.findViewById(R.id.see_all_vehicles_name);
+        vehicles_number = itemView.findViewById(R.id.see_all_vehicles_number);
+        vehicle_popular_cardView = itemView.findViewById(R.id.see_all_cars_card);
+        vehicle_popular_rating = itemView.findViewById(R.id.see_all_vehicles_rate);
     }
 }

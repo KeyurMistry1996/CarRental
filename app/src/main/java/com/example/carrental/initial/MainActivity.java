@@ -342,7 +342,6 @@ public class MainActivity extends AppCompatActivity {
         db.collection("user")
                 .whereEqualTo("email", txtloginemail)
                 .whereEqualTo("password", txtloginpassword)
-                .whereEqualTo("user_type", "user")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

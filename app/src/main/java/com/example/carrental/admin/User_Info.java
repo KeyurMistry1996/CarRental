@@ -61,7 +61,7 @@ public class User_Info extends AppCompatActivity {
                                 reference.delete();
                                 Toast.makeText(User_Info.this, "Deleted", Toast.LENGTH_SHORT).show();
                                 finish();
-                                overridePendingTransition(0,R.anim.slide_exite);
+
                             }
                         })
 

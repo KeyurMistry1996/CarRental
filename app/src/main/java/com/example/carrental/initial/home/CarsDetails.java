@@ -57,7 +57,7 @@ public class CarsDetails extends AppCompatActivity {
 
         final Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        String activity = intent.getStringExtra("Activity");
+        final boolean search = intent.getBooleanExtra("Search",false);
 
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("hello,sign in",MODE_PRIVATE);
@@ -97,9 +97,17 @@ public class CarsDetails extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScheduleActivity.class);
-                intent.putExtra("id",id);
-                startActivity(intent);
+                if(search){
+                    Intent intent = new Intent(getApplicationContext(),DrivingLicence.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(),ScheduleActivity.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }
+
             }
         });
 
