@@ -12,7 +12,12 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".initial.host.checkoutActivity"
+        <activity android:name=".initial.history.HistoryCarDetails"></activity>
+        <activity
+            android:name=".initial.profile.AboutusActivity"
+            android:label="About Us" />
+        <activity
+            android:name=".initial.host.checkoutActivity"
             android:label="Checkout"
             android:parentActivityName=".initial.home.HomeActivity" />
         <activity

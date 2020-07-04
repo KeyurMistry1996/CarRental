@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
 
     private Uri filePath;
 
-    TextView viewprofile, logout, changepassword,contactus;
+    TextView viewprofile, logout, changepassword,contactus,about;
     Button profilepicSave;
 
     CircularImageView setPhoto;
@@ -95,6 +95,7 @@ public class ProfileFragment extends Fragment {
         logout = view.findViewById(R.id.logout);
         changepassword = view.findViewById(R.id.changepassword);
         contactus = view.findViewById(R.id.contactus);
+        about = view.findViewById(R.id.about_us);
 
         profile = FirebaseFirestore.getInstance();
 
@@ -130,6 +131,13 @@ public class ProfileFragment extends Fragment {
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"projectcarrental82@gmail.com"});
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contact Us");
                 startActivity(emailIntent);
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+startActivity(new Intent(getActivity(),AboutusActivity.class));
             }
         });
 

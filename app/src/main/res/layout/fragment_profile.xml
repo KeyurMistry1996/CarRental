@@ -79,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="About Us"
+            android:id="@+id/about_us"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:textSize="20dp" />

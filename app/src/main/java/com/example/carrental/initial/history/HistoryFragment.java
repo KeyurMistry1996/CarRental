@@ -3,6 +3,7 @@ package com.example.carrental.initial.history;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,7 @@ import java.util.Objects;
 public class HistoryFragment extends Fragment {
     RecyclerView historyList;
     FirebaseFirestore carsDB;
-    FirestoreRecyclerAdapter adapterHistory;
+    FirestoreRecyclerAdapter<HistoryPojo, HistoryrecyclerView> adapterHistory;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -55,11 +57,12 @@ public class HistoryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
         historyList = view.findViewById(R.id.historyRecycleView);
+        historyList.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
         carsDB = FirebaseFirestore.getInstance();
 
@@ -68,7 +71,7 @@ public class HistoryFragment extends Fragment {
 
 
 
-        Query query = carsDB.collection("Cars").whereEqualTo("user",email);
+        Query query = carsDB.collection("bookedCar").whereEqualTo("user",email);
 
         FirestoreRecyclerOptions<HistoryPojo> options =new FirestoreRecyclerOptions.Builder<HistoryPojo>()
                 .setQuery(query,HistoryPojo.class)
@@ -80,17 +83,15 @@ public class HistoryFragment extends Fragment {
             @Override
             public HistoryrecyclerView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_list, parent, false);
-              return new HistoryrecyclerView(view);
+                return new HistoryrecyclerView(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull final HistoryrecyclerView holder, int position, @NonNull HistoryPojo model) {
+            protected void onBindViewHolder(@NonNull final HistoryrecyclerView holder, int position, @NonNull final HistoryPojo model) {
 
                 holder.vehicles_name.setText(model.getDropLocation());
 
-                String carId = model.getCarId();
-                Toast.makeText(getActivity(), carId, Toast.LENGTH_SHORT).show();
-                System.out.println(carId);
+                final String carId = model.getCarId();
                 carsDB.collection("Cars")
                         .document(carId)
                         .get()
@@ -100,12 +101,38 @@ public class HistoryFragment extends Fragment {
                                 if(task.getResult() != null)
                                 {
                                     DocumentSnapshot documentSnapshot = task.getResult();
+                                    String image = (String) documentSnapshot.get("url_Of_CarImage");
                                     Picasso.with(getActivity())
-                                          .load((Uri) documentSnapshot.get("url_Of_CarImage"))
+                                          .load(image)
                                           .into(holder.vehicles_image);
+                                    holder.vehicles_name.setText((CharSequence)documentSnapshot.get("brand"));
+                                    Long rating = (Long) documentSnapshot.get("rating");
+                                holder.vehicle_new_rating.setRating(rating);
+                                if(model.isBooking()){
+                                    holder.vehicles_status.setText("Confirmed");
+                                }
+                                else {
+                                   holder.vehicles_status.setText("Cancelled");
+                                   holder.vehicles_status.setTextColor(Color.RED);
+                               }
                                 }
                             }
                         });
+
+                holder.vehicle_new_cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(),HistoryCarDetails.class);
+                        intent.putExtra("carId",carId);
+                        intent.putExtra("pickUpTime",model.getPickTime());
+                        intent.putExtra("pickUpLocation",model.getPickLocation());
+                        intent.putExtra("dropTime",model.getDropTime());
+                        intent.putExtra("dropLocation",model.getDropLocation());
+                        intent.putExtra("price",model.getPrice());
+                        intent.putExtra("buttonStatus",model.isBooking());
+                        startActivity(intent);
+                    }
+                });
 
 
             }
@@ -157,23 +184,26 @@ public class HistoryFragment extends Fragment {
 //            }
 //
 //        };
-        historyList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         historyList.setAdapter(adapterHistory);
+        adapterHistory.startListening();
+        adapterHistory.notifyDataSetChanged();
+
         return view;
     }
 
-    public class HistoryrecyclerView extends RecyclerView.ViewHolder {
+    private class HistoryrecyclerView extends RecyclerView.ViewHolder {
         public ImageView vehicles_image;
         public TextView vehicles_name,vehicles_status;
         public CardView vehicle_new_cardView;
         public RatingBar vehicle_new_rating;
-        public HistoryrecyclerView(View view) {
-            super(view);
-            vehicles_image = view.findViewById(R.id.history_vehicles_image);
-            vehicles_name = view.findViewById(R.id.history_vehicles_name);
-            vehicles_status = view.findViewById(R.id.history_vehicles_status);
-            vehicle_new_cardView = view.findViewById(R.id.history_cars_card);
-            vehicle_new_rating = view.findViewById(R.id.history_vehicles_rate);
+        public HistoryrecyclerView(@NonNull View itemView) {
+            super(itemView);
+            vehicles_image = itemView.findViewById(R.id.history_vehicles_image);
+            vehicles_name = itemView.findViewById(R.id.history_vehicles_name);
+            vehicles_status = itemView.findViewById(R.id.history_vehicles_status);
+            vehicle_new_cardView = itemView.findViewById(R.id.history_cars_card);
+            vehicle_new_rating = itemView.findViewById(R.id.history_vehicles_rate);
         }
     }
 
