@@ -68,7 +68,7 @@ public class ManageUser extends AppCompatActivity {
                 String number = (String) getSnapshots().getSnapshot(position).get("number");
                 Picasso.with(getApplicationContext())
                         .load(model.getProfileurl())
-                        .placeholder(R.drawable.bluetooth)
+                        .placeholder(R.drawable.ic_person_black_24dp)
                         .into(holder.profile);
                 final UserInfo userInfo = new UserInfo(documentId,name,email,number);
                 holder.cardView.setOnClickListener(new View.OnClickListener() {

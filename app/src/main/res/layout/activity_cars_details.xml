@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topCardDetails"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/topCardDetails"/>
 
     <TextView
             android:id="@+id/carDetailsName"
@@ -55,6 +55,7 @@
             android:scaleX=".5"
             android:scaleY=".5"
             android:transformPivotX="20dp"
+            android:isIndicator="true"
             android:transformPivotY="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carDetailsName" />

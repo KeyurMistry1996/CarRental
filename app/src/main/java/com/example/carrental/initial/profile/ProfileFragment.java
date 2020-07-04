@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
 
     private Uri filePath;
 
-    TextView viewprofile,logout,changepassword;
+    TextView viewprofile, logout, changepassword,contactus;
     Button profilepicSave;
 
     CircularImageView setPhoto;
@@ -69,12 +69,13 @@ public class ProfileFragment extends Fragment {
 
     String downloadprofile;
     String userrefID;
-    EditText newpassword,retype;
+    EditText newpassword, retype;
 
     StorageReference userprofile;
     private FirebaseFirestore profile;
 
     String email;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -87,23 +88,24 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-        setPhoto=view.findViewById(R.id.set_profile);
-        selectPhoto=view.findViewById(R.id.select_profile);
-        profilepicSave=view.findViewById(R.id.profilepicSave);
-        viewprofile=view.findViewById(R.id.viewprofile);
-        logout=view.findViewById(R.id.logout);
-        changepassword=view.findViewById(R.id.changepassword);
+        setPhoto = view.findViewById(R.id.set_profile);
+        selectPhoto = view.findViewById(R.id.select_profile);
+        profilepicSave = view.findViewById(R.id.profilepicSave);
+        viewprofile = view.findViewById(R.id.viewprofile);
+        logout = view.findViewById(R.id.logout);
+        changepassword = view.findViewById(R.id.changepassword);
+        contactus = view.findViewById(R.id.contactus);
 
         profile = FirebaseFirestore.getInstance();
 
 
         userprofile = FirebaseStorage.getInstance().getReference("User profile");
 
-        SharedPreferences sharedPreferences= getActivity().getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        email=sharedPreferences.getString(MainActivity.Email_shared,MainActivity.SHARED_PREF_NAME);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        email = sharedPreferences.getString(MainActivity.Email_shared, MainActivity.SHARED_PREF_NAME);
 
         profile.collection("user")
-                .whereEqualTo("email",email)
+                .whereEqualTo("email", email)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -120,6 +122,16 @@ public class ProfileFragment extends Fragment {
                     }
                 });
 
+        contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"projectcarrental82@gmail.com"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Contact Us");
+                startActivity(emailIntent);
+            }
+        });
 
         changepassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,29 +150,36 @@ public class ProfileFragment extends Fragment {
                         String newp = newpassword.getText().toString().trim();
                         String rep = retype.getText().toString().trim();
 
-                        if(newp.equals(rep))
-                        {
-                            final DocumentReference documentReference = FirebaseFirestore.getInstance()
-                                    .collection("user")
-                                    .document(userrefID);
-                            Map<String , Object> changepassword = new HashMap<>();
-                            changepassword.put("password" , newp);
-                            documentReference.update(changepassword)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(getActivity(), "Password changed", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getActivity(), "Failed to change password", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                        if (newp.isEmpty()) {
+                            newpassword.setError("Plzz Enter Passowrd");
+                        }
+                        if (rep.isEmpty()) {
+                            retype.setError("Plzz Retype new Password");
+                        } else {
 
-                        }else {
+                            if (newp.equals(rep)) {
+                                final DocumentReference documentReference = FirebaseFirestore.getInstance()
+                                        .collection("user")
+                                        .document(userrefID);
+                                Map<String, Object> changepassword = new HashMap<>();
+                                changepassword.put("password", newp);
+                                documentReference.update(changepassword)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(getActivity(), "Password changed", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getActivity(), "Failed to change password", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                            Toast.makeText(getActivity(), "Password Didnt Match", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                Toast.makeText(getActivity(), "Password Didnt Match", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                     }
@@ -179,19 +198,19 @@ public class ProfileFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 builder.setTitle("Log Out");
                 builder.setMessage("Are you sure you want to LogOut?");
                 builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(MainActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.clear();
                         editor.commit();
 
-                        Intent intentH= new Intent(getActivity(),MainActivity.class);
+                        Intent intentH = new Intent(getActivity(), MainActivity.class);
                         startActivity(intentH);
                         getActivity().finish();
 
@@ -215,7 +234,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getActivity(),viewProfileActivity.class));
+                startActivity(new Intent(getActivity(), viewProfileActivity.class));
 
             }
         });
@@ -245,15 +264,14 @@ public class ProfileFragment extends Fragment {
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             downloadprofile = task.getResult().toString();
                             final DocumentReference documentReference = FirebaseFirestore.getInstance()
                                     .collection("user")
                                     .document(userrefID);
 //                            UserPojo updateProfile = new UserPojo(downloadprofile);
-                            Map<String , Object> updateProfile = new HashMap<>();
-                            updateProfile.put("profileurl" , downloadprofile);
+                            Map<String, Object> updateProfile = new HashMap<>();
+                            updateProfile.put("profileurl", downloadprofile);
                             documentReference.update(updateProfile)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -284,6 +302,7 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -298,6 +317,7 @@ public class ProfileFragment extends Fragment {
             }
         }
     }
+
     public String getFileExtension(Uri uri) {
         ContentResolver cR = Objects.requireNonNull(this.getActivity()).getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();

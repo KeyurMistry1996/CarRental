@@ -46,6 +46,11 @@ public class DrivingLicence extends AppCompatActivity {
     TextInputLayout countryLayout, provinceLayout, lisenceNumberLayout, firstNameLayout, lastNameLayout, birthDateLayout;
     CheckBox checkBox;
 
+    String namepattern = "[a-zA-Z]+";
+    String Licenepattern = "[A-Z0-9]+";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,11 @@ public class DrivingLicence extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (country.getText().toString().matches(namepattern) && s.length() > 0) {
+                    countryLayout.setError(null);
+                } else {
+                    countryLayout.setError("Invalid Country Name");
+                }
 
             }
         });
@@ -99,7 +109,11 @@ public class DrivingLicence extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (province.getText().toString().matches(namepattern) && s.length() > 0) {
+                    provinceLayout.setError(null);
+                } else {
+                    provinceLayout.setError("Invalid province name");
+                }
             }
         });
 
@@ -116,7 +130,11 @@ public class DrivingLicence extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (lisenceNumber.getText().toString().matches(Licenepattern) && s.length() > 0) {
+                    lisenceNumberLayout.setError(null);
+                } else {
+                    lisenceNumberLayout.setError("Invalid Licence");
+                }
             }
         });
 
@@ -133,7 +151,11 @@ public class DrivingLicence extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (firstName.getText().toString().matches(namepattern) && s.length() > 0) {
+                    firstNameLayout.setError(null);
+                } else {
+                    firstNameLayout.setError("Invalid name");
+                }
             }
         });
 
@@ -150,7 +172,11 @@ public class DrivingLicence extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (lastName.getText().toString().matches(namepattern) && s.length() > 0) {
+                    lastNameLayout.setError(null);
+                } else {
+                    lastNameLayout.setError("Invalid last name");
+                }
             }
         });
 
@@ -203,9 +229,11 @@ public class DrivingLicence extends AppCompatActivity {
         birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(DrivingLicence.this, date, myCalendar
+               DatePickerDialog datePickerDialog = new DatePickerDialog(DrivingLicence.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+               datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+               datePickerDialog.show();
 
             }
         });

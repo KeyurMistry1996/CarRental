@@ -12,40 +12,52 @@
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".initial.home.DrivingLicence"
-            android:parentActivityName=".initial.home.ScheduleActivity"
-            android:label="Driving License"></activity>
+        <activity android:name=".initial.host.checkoutActivity"
+            android:label="Checkout"
+            android:parentActivityName=".initial.home.HomeActivity" />
+        <activity
+            android:name=".initial.home.DrivingLicence"
+            android:label="Driving License"
+            android:parentActivityName=".initial.home.ScheduleActivity" />
         <activity
             android:name=".initial.home.ScheduleActivity"
-            android:parentActivityName=".initial.home.CarsDetails"
-            android:label="Schedule"/>
+            android:label="Schedule"
+            android:parentActivityName=".initial.home.CarsDetails" />
         <activity
             android:name=".initial.home.CarsDetails"
-            android:parentActivityName=".initial.home.HomeActivity"
-            android:label="Car Details"/>
+            android:label="Car Details"
+            android:parentActivityName=".initial.home.HomeActivity" />
         <activity
             android:name=".initial.home.SeeAllCarsActivity"
-            android:parentActivityName=".initial.home.HomeActivity"
-            android:label="See All"/>
+            android:label="See All"
+            android:parentActivityName=".initial.home.HomeActivity" />
+        <activity
+            android:name=".admin.ManageCarListActivity"
+            android:label="Manage Car"
+            android:parentActivityName=".admin.AdminDashboard" />
+        <activity
+            android:name=".admin.CarInfoActivity"
+            android:label="Car Detail"
+            android:parentActivityName=".admin.ManageCarListActivity" />
         <activity
             android:name=".initial.profile.viewProfileActivity"
-
-            android:label="Profile"/>
+            android:label="Profile"
+            android:parentActivityName=".initial.home.HomeActivity" />
         <activity
             android:name=".initial.home.SummeryActivity"
-            android:parentActivityName=".initial.home.DrivingLicence"
-            android:label="Summery"/>
+            android:label="Summery"
+            android:parentActivityName=".initial.home.DrivingLicence" />
         <activity
             android:name=".initial.home.CheckoutActivity"
-            android:parentActivityName=".initial.home.SummeryActivity"
-            android:label="Checkout"/>
+            android:label="Checkout"
+            android:parentActivityName=".initial.home.SummeryActivity" />
         <activity
             android:name=".initial.search.SeeAllCarSearch"
-            android:parentActivityName=".initial.home.HomeActivity"
-            android:label="Search Result"/>
+            android:label="Search Result"
+            android:parentActivityName=".initial.home.HomeActivity" />
         <activity
             android:name=".initial.home.ETicketActivity"
-            android:label="E-Ticket"/>
+            android:label="E-Ticket" />
         <activity
             android:name=".initial.host.PriceActivity"
             android:label="Price"
@@ -65,13 +77,15 @@
         <activity android:name=".initial.home.HomeActivity" />
         <activity
             android:name=".admin.User_Info"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="User Info"
+            android:parentActivityName=".admin.ManageUser" />
         <activity
             android:name=".admin.ManageUser"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="Manage User"
+            android:parentActivityName=".admin.AdminDashboard" />
         <activity
             android:name=".admin.AdminDashboard"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="Admin Dashboard" />
         <activity
             android:name=".initial.Splash"
             android:theme="@style/Theme.AppCompat.NoActionBar">

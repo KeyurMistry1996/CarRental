@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contact Us"
+            android:id="@+id/contactus"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:textSize="20dp" />

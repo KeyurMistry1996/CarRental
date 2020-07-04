@@ -75,7 +75,9 @@ public class vehiclesFragment extends Fragment {
                         .into(holder.vehicles_image);
                 holder.vehicles_name.setText(model.getBrand());
                 holder.vehicles_number.setText(model.getTransmission());
-//                holder.vehicles_rate.setRating(model.getRating());
+                Float stars = new Float(String.valueOf(model.getRating()));
+                holder.vehicles_rate.setRating(stars);
+
             }
         };
         host_car_list.setHasFixedSize(true);
@@ -97,7 +99,7 @@ public class vehiclesFragment extends Fragment {
             vehicles_image = itemView.findViewById(R.id.vehicles_image);
             vehicles_name = itemView.findViewById(R.id.vehicles_name);
             vehicles_number = itemView.findViewById(R.id.vehicles_number);
-
+            vehicles_rate = itemView.findViewById(R.id.vehicles_rate);
         }
     }
 

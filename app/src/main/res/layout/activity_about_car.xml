@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Year"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:textColor="@color/colorPrimaryDark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,18 +110,6 @@
                         android:textColor="@color/colorPrimaryDark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/loginyes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:buttonTint="@color/colorPrimaryDark"
-                    android:text="I am Listing a personal vehical"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorPrimaryDark"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
                 <Button
                     android:id="@+id/next"
                     android:layout_width="match_parent"
@@ -129,6 +117,7 @@
                     android:background="@drawable/rectangle"
                     android:paddingBottom="10dp"
                     android:text="Next"
+                    android:layout_marginTop="30dp"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18sp" />

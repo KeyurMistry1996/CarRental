@@ -26,6 +26,7 @@ public class SummeryActivity extends AppCompatActivity {
     long totalPrice;
     long taxTotal;
     long allTotal;
+    public String owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class SummeryActivity extends AppCompatActivity {
                 ratingBar.setRating(stars);
                 taxTotal = (long) (totalPrice*0.1);
                 tax.setText("$"+String.valueOf(taxTotal));
+                owner = (String) documentSnapshot.get("user_email");
                 allTotal = totalPrice+taxTotal;
                 total.setText(String.valueOf("$"+allTotal));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -86,6 +88,7 @@ public class SummeryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),CheckoutActivity.class);
+                intent.putExtra("owner",owner);
                 startActivity(intent);
             }
         });

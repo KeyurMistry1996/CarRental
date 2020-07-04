@@ -43,7 +43,7 @@ public class User_Info extends AppCompatActivity {
 
         Picasso.with(getApplicationContext())
                 .load(intent.getStringExtra("image"))
-                .placeholder(R.drawable.bluetooth)
+                .placeholder(R.drawable.ic_person_black_24dp)
                 .into(imageView);
 
 

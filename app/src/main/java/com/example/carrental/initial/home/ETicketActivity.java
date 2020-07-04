@@ -41,6 +41,10 @@ public class ETicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_e_ticket);
 
+        Bundle bundle = getIntent().getExtras();
+
+        final String owner = bundle.getString("owner");
+
         imageView = findViewById(R.id.barcodeImage);
         button = findViewById(R.id.buttonGoHome);
 
@@ -89,7 +93,7 @@ public class ETicketActivity extends AppCompatActivity {
         final Map<String, Object> data1 = new HashMap<>();
         data1.put("earning", price);
         final int finalPrice = price;
-        db.collection("user").whereEqualTo("email", user).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("user").whereEqualTo("email", owner).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 String userId = null;

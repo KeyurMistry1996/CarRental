@@ -62,6 +62,7 @@
                 android:numStars="5"
                 android:scaleX=".5"
                 android:scaleY=".5"
+                android:isIndicator="true"
                 android:transformPivotX="20dp"
                 android:transformPivotY="10dp"
                 />

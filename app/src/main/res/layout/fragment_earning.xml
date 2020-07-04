@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".initial.host.tabFragment.earningFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+ 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Earning fram" />
+        android:layout_height="wrap_content"
+        android:id="@+id/earningtxt"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50dp"
+        android:text="$00.00"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
+        />
 
-</FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/messagetxt"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50dp"
+        android:layout_margin="30dp"
+        android:text="You have not Earn Anything yet !"
+        android:gravity="center"
+        android:layout_below="@+id/earningtxt"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_round"
+        android:visibility="gone"
+        android:text="Withdraw"
+        android:paddingBottom="10dp"
+        android:id="@+id/withdraw"
+        />
+</RelativeLayout>

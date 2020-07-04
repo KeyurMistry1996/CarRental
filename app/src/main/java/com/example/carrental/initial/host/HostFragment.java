@@ -92,9 +92,11 @@ public class HostFragment extends Fragment {
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
+                        gettoaboutcar.setVisibility(View.VISIBLE);
                         setfragment(vehiclesFragment);
                         break;
                     case 1:
+                        gettoaboutcar.setVisibility(View.GONE);
                         setfragment(earningFragment);
                         break;
 

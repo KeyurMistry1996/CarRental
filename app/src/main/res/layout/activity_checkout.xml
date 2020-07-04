@@ -47,6 +47,8 @@
             android:id="@+id/cardNumber"
             android:layout_width="match_parent"
             android:layout_height="47dp"
+            android:ems="16"
+            android:maxLength="16"
             android:hint="Card Number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +77,7 @@
             android:id="@+id/expiryDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="00/00" />
+            android:hint="MM/YYYY" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -103,7 +105,9 @@
             android:id="@+id/cvvNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="000" />
+            android:ems="3"
+            android:maxLength="3"
+            android:hint="123" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox

@@ -42,12 +42,18 @@ public class CheckoutActivity extends AppCompatActivity {
     CheckBox checkBox;
     Button button;
     String exDate;
+    String namepattern = "[a-zA-Z]+";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+
+        Bundle bundle = getIntent().getExtras();
+
+        final String owner = bundle.getString("owner");
 
         name = findViewById(R.id.nameOnCard);
         number = findViewById(R.id.cardNumber);
@@ -75,7 +81,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (name.getText().toString().matches(namepattern) && s.length() > 0) {
+                    nameLayout.setError(null);
+                } else {
+                    nameLayout.setError("Invalid Name");
+                }
 
             }
         });
@@ -92,6 +102,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(number.getText().toString().trim().length() < 16)
+                {
+                    numberLayout.setError("Invalid card number");
+                }
 
             }
         });
@@ -108,8 +122,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-
+                if(dateExpiry.getText().toString().trim().length() < 7)
+                {
+                    dateLayout.setError("Invalid Date");
+                }
             }
         });
         cvv.addTextChangedListener(new TextWatcher() {
@@ -125,7 +141,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(cvv.getText().toString().trim().length() < 3)
+                {
+                    cvvLayout.setError("Invalid CVV");
+                }
 
             }
         });
@@ -176,7 +195,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
                     }
-                    startActivity(new Intent(getApplicationContext(),ETicketActivity.class));
+                    Intent intent = new Intent(getApplicationContext(),ETicketActivity.class);
+                    intent.putExtra("owner",owner);
+                    startActivity(intent);
 
                 }
 
