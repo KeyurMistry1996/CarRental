@@ -58,6 +58,7 @@ public class HistoryCarDetails extends AppCompatActivity {
         String priceString = intent.getStringExtra("price");
         status = intent.getBooleanExtra("buttonstatus",true);
 
+
         if(status){
             cancelled.setVisibility(View.VISIBLE);
         }

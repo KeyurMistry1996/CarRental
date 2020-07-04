@@ -111,8 +111,8 @@ public class HomeCarFragment extends Fragment {
         final String email = sharedPreferences.getString(MainActivity.Email_shared, MainActivity.SHARED_PREF_NAME);
 
 
-        final Query query = carsDB.collection("Cars")/*.whereEqualTo("status",true)*/;
-        final Query queryPopular = carsDB.collection("Cars")/*.whereEqualTo("status",true)*/;
+        final Query query = carsDB.collection("Cars").whereEqualTo("status",true);
+        final Query queryPopular = carsDB.collection("Cars").whereEqualTo("status",true);
 
         see_all_new.setOnClickListener(new View.OnClickListener() {
             @Override

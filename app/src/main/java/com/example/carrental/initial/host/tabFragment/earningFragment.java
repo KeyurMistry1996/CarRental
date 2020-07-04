@@ -1,6 +1,7 @@
 package com.example.carrental.initial.host.tabFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.carrental.R;
 import com.example.carrental.initial.MainActivity;
+import com.example.carrental.initial.host.checkoutActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +35,7 @@ public class earningFragment extends Fragment {
     FirebaseFirestore earning;
 
     String email;
-
+    Float earn;
     public earningFragment() {
         // Required empty public constructor
     }
@@ -62,7 +64,7 @@ public class earningFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Float earn = new Float(String.valueOf(document.get("earning")));
+                                earn= new Float(String.valueOf(document.get("earning")));
                                 if(earn > 0)
                                 {
                                     earningtxt.setText("$"+earn);
@@ -76,6 +78,14 @@ public class earningFragment extends Fragment {
                 });
 
 
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), checkoutActivity.class);
+                intent.putExtra("earn",earn);
+                startActivity(intent);
+            }
+        });
 
 
         return view;

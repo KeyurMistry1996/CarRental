@@ -48,7 +48,7 @@ public class SeeAllCarsActivity extends AppCompatActivity {
 
         rootRef = FirebaseFirestore.getInstance();
 
-        Query  query = rootRef.collection("Cars").whereEqualTo("popularity","New Arrival");
+        Query  query = rootRef.collection("Cars").whereEqualTo("status",true);
 
         FirestoreRecyclerOptions<CarsPojo> options = new FirestoreRecyclerOptions.Builder<CarsPojo>()
                 .setQuery(query, CarsPojo.class)
